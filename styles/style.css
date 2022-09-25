@@ -1,0 +1,333 @@
+* {
+    font-family: sans-serif;
+}
+:root {
+    --neon: #0cd;
+}
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: #25273a;
+}
+/* intro */
+.panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+}
+.panel_map,
+.game_map {
+    display: grid;
+    grid-template-columns: repeat(3,min-content);
+    margin: 5px;
+}
+.panel_map .cs {
+    width: 65px;
+    height: 65px;
+    background: transparent;
+    border: 2.5px solid #fff;
+    filter: drop-shadow(0 0 10px var(--neon));
+}
+.game_map .cs {
+    width: 65px;
+    height: 65px;
+    background: transparent;
+    border: 2.5px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game_map .cs .o {
+    display: inline-block;
+    font-weight: 100;
+    color: #efefef;
+    transform: scale(4) translateY(-10%);
+    filter:
+        drop-shadow(0 0 5px var(--neon))
+        drop-shadow(0 0 10px var(--neon));
+}
+.game_map .cs .x {
+    display: inline-block;
+    font-weight: 100;
+    color: #efefef;
+    transform: scale(4) translateY(-10%);
+    filter:
+        drop-shadow(0 0 5px #f31c1c)
+        drop-shadow(0 0 15px #f31c1c);
+}
+.panel_map .cs:nth-child(1),
+.game_map .cs:nth-child(1) {
+    border-top: transparent;
+    border-left: transparent;
+}
+.panel_map .cs:nth-child(2),
+.game_map .cs:nth-child(2) {
+    border-top: transparent;
+}
+.panel_map .cs:nth-child(3),
+.game_map .cs:nth-child(3) {
+    border-top: transparent;
+    border-right: transparent;
+}
+.panel_map .cs:nth-child(4),
+.game_map .cs:nth-child(4) {
+    border-left: transparent;
+}
+.panel_map .cs:nth-child(6),
+.game_map .cs:nth-child(6) {
+    border-right: transparent;
+}
+.panel_map .cs:nth-child(7),
+.game_map .cs:nth-child(7) {
+    border-bottom: transparent;
+    border-left: transparent;
+}
+.panel_map .cs:nth-child(8),
+.game_map .cs:nth-child(8) {
+    border-bottom: transparent;
+}
+.panel_map .cs:nth-child(9),
+.game_map .cs:nth-child(9) {
+    border-bottom: transparent;
+    border-right: transparent;
+}
+#init {
+    background: var(--neon);
+    border: transparent;
+    outline: transparent;
+    padding: 5px 17px;
+    border-bottom: 4px solid #178;
+    cursor: pointer;
+}
+#init:hover {
+    background: #09a;
+    border-bottom: 4px solid #067;
+}
+#init h1 {
+    color: #fff;
+    font-size: 23px;
+    letter-spacing: 5px;
+    margin: 0;
+    font-weight: 400;
+}
+/* options */
+.mode {
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0 0 0;
+}
+.mode_option {
+    padding: 5px 14px;
+    background: var(--neon);
+    cursor: pointer;
+    position: relative;
+}
+.mode_option-on::after {
+    content: '';
+    display: inline-block;
+    width: 80%;
+    height: 8px;
+    background: #5ff4;
+    border-radius: 50%;
+    position: absolute;
+    left: 10%;
+    bottom: -17px;
+    pointer-events: none;
+    filter: blur(4px);
+}
+.mode_option-off {
+    transform: scale(0.9);
+    opacity: 0.2;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.mode_option-off:hover {
+    z-index: 1000;
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+.mode-option_title {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: #45475a;
+}
+.mode-option_presentation {
+    display: flex;
+    align-items: center;
+}
+.mode-option_presentation .player {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #09a;
+}
+.mode-option_vs {
+    font-size: 19px;
+    margin: 5px;
+    font-weight: 100;
+    color: #fff;
+}
+.details {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 40px 20px;
+}
+.details .vs {
+    font-size: 40px;
+    color: #fff;
+    font-style: italic;
+}
+.details .player-config {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 150px;
+}
+.details .p-1 {
+    align-self: flex-start;
+}
+.details .p-2 {
+    align-self: flex-end;
+}
+.details .player-config .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #2962ff;
+    position: relative;
+    cursor: pointer;
+}
+.details .player-config .avatar .change-avatar {
+    padding: 10px;
+    border-radius: 10px;
+    background: #0cd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 150px;
+    z-index: 1000;
+    cursor: default;
+}
+.details .p-1 .avatar .change-avatar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(110%,-25%);
+}
+.details .p-2 .avatar .change-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-110%,-25%);
+}
+.details .player-config .avatar .change-avatar::after {
+    content: '';
+    background: #0cd;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.details .p-1 .avatar .change-avatar::after {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-100%,-50%);
+}
+.details .p-2 .avatar .change-avatar::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(100%,-50%);
+}
+.details .player-config .avatar .change-avatar_option {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid #25273a;
+    cursor: pointer;
+}
+.details #r {
+    background: #ff1744;
+}
+.details #pi {
+    background: #ec407a;
+}
+.details #pu {
+    background: #aa00ff;
+}
+.details #b {
+    background: #2962ff;
+}
+.details #g {
+    background: #00e676;
+}
+.details #o {
+    background: #ffa726;
+}
+.details .player-config .gun {
+    font-size: 80px;
+    color: #fff;
+}
+.details .p-1 .gun {
+    filter:
+        drop-shadow(0 0 5px #f31c1c)
+        drop-shadow(0 0 15px #f31c1c);
+}
+.details .p-2 .gun {
+    filter:
+        drop-shadow(0 0 5px #18a)
+        drop-shadow(0 0 15px #18a);
+}
+.details_button {
+    background: var(--neon);
+    outline: transparent;
+    border: transparent;
+    border-bottom: 4px solid #178;
+    padding: 5px 17px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 400;
+    letter-spacing: 5px;
+}
+.details_button:hover {
+    background: #09a;
+    border-bottom: 4px solid #067;
+}
+/* game */
+.game {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.game .player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 90px;
+}
+.game .player-2 {
+    transform: rotate(180deg);
+}
+.game .player_avatar {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #eee;
+}
+.player_score {
+    font-size: 25px;
+    color: #efefef;
+}
