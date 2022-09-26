@@ -22,6 +22,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3,min-content);
     margin: 5px;
+    position: relative;
 }
 .panel_map .cs {
     width: 65px;
@@ -29,6 +30,31 @@ body {
     background: transparent;
     border: 2.5px solid #fff;
     filter: drop-shadow(0 0 10px var(--neon));
+}
+.game_map_before {
+    display: inline-block;
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    background: #00e676;
+    box-shadow: 
+        0 0 5px #00e676,
+        0 0 15px #00e676,
+        0 0 100px #00e676;
+    /* transform: translateY(32px); row-1 */
+    /* transform: translateY(95px); row-2 */
+    /* transform: translateY(160px); row-3 */
+    /* transform: rotate(90deg) translate(95px,64px);  column-1 */
+    /* transform: rotate(90deg) translate(95px,0);  column-2 */
+    /* transform: rotate(90deg) translate(95px,-66px);  column-3 */
+
+    /* transform: rotate(45deg); t-l
+    bottom: 48%;
+    left: -30px; */
+    
+    /* transform: rotate(-45deg); t-r
+    bottom: 48%;
+    left: -30px; */
 }
 .game_map .cs {
     width: 65px;
@@ -330,4 +356,13 @@ body {
 .player_score {
     font-size: 25px;
     color: #efefef;
+}
+/*  */
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

@@ -6,15 +6,7 @@ let map = [
     "c","c","c"
 ];
 let player = "x";
-// cas.forEach(btn =>{
-//     btn.addEventListener('click',()=>{
-//         const i = btn.id.split('-')[1];
-//         if (map[i]!=="c") return console.error("Esa casilla ya esta ocupada")
-//         play(player,i);
-//         btn.textContent = player;
-//         player = player == "x" ? "o" : "x";
-//     })
-// })
+let win = false;
 
 const init = document.getElementById('init');
 init.addEventListener('click',()=>{
@@ -145,43 +137,55 @@ const winner = ()=>{
     const score = document.getElementById(`score-${player}`);
     score.textContent = parseInt(score.textContent)+1;
     const cs = document.querySelectorAll('.cs');
-    cs.forEach(c =>{
-        c.innerHTML = '';
-    })
-    map = [
-        "c","c","c",
-        "c","c","c",
-        "c","c","c"
-    ];
+    win = true;
+    const game = document.querySelector('.game_map');
+    const gameB = document.createElement('DIV');
+    gameB.classList.add('game_map_before');
+    game.appendChild(gameB);
+    return gameB;
 }
 const play = (plyr,c) =>{
     map[c] = plyr;
     // verify
     if ((map[0] == plyr) && (map[1] == plyr) && (map[2] == plyr)){
         console.log("if=1");
-        return winner();
+        const game = winner();
+        return game.style.transform = "translateY(28px)";
     } 
     else if ((map[3] == plyr) && (map[4] == plyr) && (map[5] == plyr)){
         console.log("if=2");
-        return winner();
+        const game = winner();
+        return game.style.transform = "translateY(93px)";
     } else if ((map[6] == plyr) && (map[7] == plyr) && (map[8] == plyr)){
         console.log("if=3");
-        return winner();
+        const game = winner();
+        return game.style.transform = "translateY(158px)";
     }  else if ((map[0] == plyr) && (map[3] == plyr) && (map[6] == plyr)){
         console.log("if=4");
-        return winner();
+        const game = winner();
+        return game.style.transform = "rotate(90deg) translate(95px,65px)";
     }  else if ((map[1] == plyr) && (map[4] == plyr) && (map[7] == plyr)){
         console.log("if=5");
-        return winner();
+        const game = winner();
+        return game.style.transform = "rotate(90deg) translate(95px,0px)";
     }  else if ((map[2] == plyr) && (map[5] == plyr) && (map[8] == plyr)){
         console.log("if=6");
-        return winner();
+        const game = winner();
+        return game.style.transform = "rotate(90deg) translate(95px,-66px)";
     }  else if ((map[0] == plyr) && (map[4] == plyr) && (map[8] == plyr)){
         console.log("if=7");
-        return winner();
+        const game = winner();
+        game.style.width = "255px";
+        game.style.transform = "rotate(45deg)";
+        game.style.top = "48%";
+        return game.style.left = "-30px";
     }  else if ((map[2] == plyr) && (map[4] == plyr) && (map[6] == plyr)){
         console.log("if=8");
-        return winner();
+        const game = winner();
+        game.style.width = "255px";
+        game.style.transform = "rotate(-45deg)";
+        game.style.top = "48%";
+        return game.style.left = "-30px";
     } else {
         let c = 0;
         map.forEach(cs =>{
@@ -324,9 +328,10 @@ const gameInit = ()=>{
     p2.appendChild(p2sco);
     document.body.appendChild(container);
     // events
-    const map = document.querySelectorAll('.cs');
-    map.forEach(e =>{
-        e.addEventListener('click',()=>{
+    const c = document.querySelectorAll('.cs');
+    c.forEach(e =>{
+        e.addEventListener('click',(v)=>{
+            v.stopPropagation();
             if (e.childElementCount == 0){
                 const at = document.createElement('H3');
                 at.classList.add(player);
@@ -335,7 +340,26 @@ const gameInit = ()=>{
                 const i = e.id.split('-')[1];
                 play(player,i-1);
                 player = player == "x" ? "o" : "x";
-            }
+            } else if (win) newG();
         })
     })
+    document.body.addEventListener('click',()=>{
+        if (win){
+            newG();
+        }
+    })
+}
+const newG = ()=>{
+    const cs = document.querySelectorAll('.cs');
+    cs.forEach(c =>{
+        c.innerHTML = '';
+    })
+    map = [
+        "c","c","c",
+        "c","c","c",
+        "c","c","c"
+    ];
+    const game = document.querySelector('.game_map');
+    const gameB = document.querySelector('.game_map_before');
+    game.removeChild(gameB);
 }
