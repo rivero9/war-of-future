@@ -329,15 +329,15 @@ const gameInit = ()=>{
     document.body.appendChild(container);
     // events
     const c = document.querySelectorAll('.cs');
-    c.forEach(e =>{
-        e.addEventListener('click',(v)=>{
-            v.stopPropagation();
-            if (e.childElementCount == 0){
+    c.forEach(cs =>{
+        cs.addEventListener('click',e=>{
+            e.stopPropagation();
+            if (cs.childElementCount == 0){
                 const at = document.createElement('H3');
                 at.classList.add(player);
                 at.textContent = player;
-                e.appendChild(at);
-                const i = e.id.split('-')[1];
+                cs.appendChild(at);
+                const i = cs.id.split('-')[1];
                 play(player,i-1);
                 player = player == "x" ? "o" : "x";
             } else if (win) newG();
@@ -362,4 +362,5 @@ const newG = ()=>{
     const game = document.querySelector('.game_map');
     const gameB = document.querySelector('.game_map_before');
     game.removeChild(gameB);
+    return win = false;
 }
