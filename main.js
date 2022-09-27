@@ -10,7 +10,7 @@ let win = false;
 
 const init = document.getElementById('init');
 init.addEventListener('click',()=>{
-    const panel =  document.querySelector('.panel')
+    const panel = document.querySelector('.panel');
     const menu = document.createElement('DIV');
     menu.classList.add('menu');
     // mode
@@ -262,6 +262,33 @@ const changePlayer = (body,storage) =>{
 const gameInit = ()=>{
     const container = document.createElement('DIV');
     container.classList.add('game');
+    const b = document.createElement('DIV');
+    b.classList.add('game_bars');
+    b.innerHTML = `<svg id="bars" ria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>`;
+    const containerMenu = document.createElement('DIV');
+    containerMenu.classList.add('game_menu-container');
+    const menu = document.createElement('UL');
+    menu.classList.add('game_menu');
+    const resume = document.createElement('LI');
+    resume.setAttribute('style','z-index:4')
+    resume.classList.add('game_menu_option');
+    const resumeT = document.createElement('SPAN');
+    resumeT.textContent = "RESUME";
+    const sonido = document.createElement('LI');
+    sonido.setAttribute('style','z-index:3')
+    sonido.classList.add('game_menu_option');
+    const sonidoT = document.createElement('SPAN');
+    sonidoT.textContent = "SONIDO";
+    const reset = document.createElement('LI');
+    reset.setAttribute('style','z-index:2')
+    reset.classList.add('game_menu_option');
+    const resetT = document.createElement('SPAN');
+    resetT.textContent = "RESET";
+    const me = document.createElement('LI');
+    me.setAttribute('style','z-index:1')
+    me.classList.add('game_menu_option');
+    const meT = document.createElement('SPAN');
+    meT.textContent = "MENU";    
     const p1 = document.createElement('DIV');
     p1.classList.add('player','player-1');
     const p1Avt = document.createElement('SPAN');
@@ -310,6 +337,17 @@ const gameInit = ()=>{
     p2sco.setAttribute('id','score-o');
     p2sco.textContent = "0";
     // append-child
+    container.appendChild(b);
+    container.appendChild(containerMenu);
+    containerMenu.appendChild(menu);
+    menu.appendChild(resume);
+    resume.appendChild(resumeT);
+    menu.appendChild(sonido);
+    sonido.appendChild(sonidoT);
+    menu.appendChild(reset);
+    reset.appendChild(resetT);
+    menu.appendChild(me);
+    me.appendChild(meT);
     container.appendChild(p1);
     p1.appendChild(p1Avt);
     p1.appendChild(p1sco);
@@ -332,7 +370,8 @@ const gameInit = ()=>{
     c.forEach(cs =>{
         cs.addEventListener('click',e=>{
             e.stopPropagation();
-            if (cs.childElementCount == 0){
+            if (win) newG();
+            else if (cs.childElementCount == 0){
                 const at = document.createElement('H3');
                 at.classList.add(player);
                 at.textContent = player;
@@ -340,13 +379,147 @@ const gameInit = ()=>{
                 const i = cs.id.split('-')[1];
                 play(player,i-1);
                 player = player == "x" ? "o" : "x";
-            } else if (win) newG();
+            } 
         })
     })
     document.body.addEventListener('click',()=>{
         if (win){
             newG();
         }
+    })
+    b.addEventListener('click',()=>{
+        containerMenu.style.display = "flex";
+    })
+    resume.addEventListener('click',()=>{
+        containerMenu.style.display = "none";
+    })
+    reset.addEventListener('click',()=>{
+        p1sco.textContent = "0";
+        p2sco.textContent = "0";
+        containerMenu.style.display = "none";
+    })
+    me.addEventListener('click',()=>{
+        document.body.removeChild(container);
+        const menu = document.createElement('DIV');
+        menu.classList.add('menu');
+        // mode
+        const mode = document.createElement('DIV');
+        mode.classList.add('mode');
+        const PvP = document.createElement('DIV');
+        PvP.classList.add('mode_option','mode_option-on');
+        PvP.setAttribute('id','PvP');
+        const titlePvP = document.createElement('H1');
+        titlePvP.classList.add('mode-option_title');
+        titlePvP.textContent = "PvP";
+        const prePvP = document.createElement('DIV');
+        prePvP.classList.add('mode-option_presentation');
+        const p1 = document.createElement('SPAN');
+        p1.classList.add('player','p-1');
+        const vsP = document.createElement('I');
+        vsP.classList.add('mode-option_vs');
+        vsP.textContent = "vs";
+        const p2 = document.createElement('SPAN');
+        p2.classList.add('player','p-2');
+        const vC = document.createElement('DIV');
+        vC.classList.add('mode_option','mode_option-off');
+        vC.setAttribute('id','vIA');
+        const titleVC = document.createElement('H1');
+        titleVC.classList.add('mode-option_title');
+        titleVC.textContent = "vCibort";
+        const preVC = document.createElement('DIV');
+        preVC.classList.add('mode-option_presentation');
+        const p = document.createElement('SPAN');
+        p.classList.add('player','p-1');
+        const vsC = document.createElement('I');
+        vsC.classList.add('mode-option_vs');
+        vsC.textContent = "vs";
+        const cibort = document.createElement('SPAN');
+        cibort.classList.add('player','p-2');
+        // options
+        const details = document.createElement('DIV');
+        details.classList.add('details');
+        const p1Config = document.createElement('DIV');
+        p1Config.classList.add('player-config','p-1');
+        const p1Avatar = document.createElement('DIV');
+        p1Avatar.classList.add('avatar');
+        sessionStorage.setItem("p1",'#2962ff');
+        const p1Gun = document.createElement('DIV');
+        p1Gun.classList.add('gun');
+        p1Gun.textContent = "X";
+        const vs = document.createElement('H4');
+        vs.classList.add('vs');   
+        vs.textContent = "VS";    
+        const p2Config = document.createElement('DIV');
+        p2Config.classList.add('player-config','p-2');
+        const p2Avatar = document.createElement('DIV');
+        p2Avatar.classList.add('avatar');
+        sessionStorage.setItem("p2",'#2962ff');
+        const p2Gun = document.createElement('DIV');
+        p2Gun.classList.add('gun');
+        p2Gun.textContent = "O";
+        const play = document.createElement('BUTTON');
+        play.classList.add('details_button');
+        play.textContent = "LISTO";
+        // append-child
+        menu.appendChild(mode);
+        mode.appendChild(PvP);
+        mode.appendChild(vC);
+        PvP.appendChild(titlePvP);
+        vC.appendChild(titleVC);
+        PvP.appendChild(prePvP);
+        vC.appendChild(preVC);
+        prePvP.appendChild(p1);
+        prePvP.appendChild(vsP);
+        prePvP.appendChild(p2);
+        preVC.appendChild(p);
+        preVC.appendChild(vsC);
+        preVC.appendChild(cibort);
+        document.body.appendChild(menu);
+        menu.appendChild(details);
+        details.appendChild(p1Config);
+        details.appendChild(vs);
+        details.appendChild(p2Config);
+        p1Config.appendChild(p1Avatar)
+        p1Config.appendChild(p1Gun);
+        p2Config.appendChild(p2Gun);
+        p2Config.appendChild(p2Avatar)
+        details.appendChild(play);
+        document.body.appendChild(menu);
+        // events
+        p1Avatar.addEventListener('click',e=>{
+            e.stopPropagation();
+            if (p1Avatar.childElementCount == 0){
+                changePlayer(p1Avatar,"p1");
+            } else {
+                const changeA = document.querySelector('.change-avatar');
+                p1Avatar.removeChild(changeA);
+            }
+            document.body.addEventListener('click',()=>{
+                if (p1Avatar.childElementCount > 0){
+                    const changeA = document.querySelector('.change-avatar');
+                    p1Avatar.removeChild(changeA);
+                }
+            })
+        })
+        p2Avatar.addEventListener('click',e=>{
+            e.stopPropagation();
+            if (p2Avatar.childElementCount == 0){
+                 changePlayer(p2Avatar,"p2");
+            } else {
+                const changeA = document.querySelector('.change-avatar');
+                p2Avatar.removeChild(changeA);
+            }
+            document.body.addEventListener('click',()=>{
+                if (p2Avatar.childElementCount > 0){
+                    const changeA = document.querySelector('.change-avatar');
+                    p2Avatar.removeChild(changeA);
+                }
+            })
+        })
+        play.addEventListener('click',()=>{
+            document.body.removeChild(menu);
+            gameInit();
+        })
     })
 }
 const newG = ()=>{
