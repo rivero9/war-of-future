@@ -29,7 +29,13 @@ body {
     height: 65px;
     background: transparent;
     border: 2.5px solid #fff;
-    filter: drop-shadow(0 0 10px var(--neon));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.panel_map .cs img {
+    width: 45px;
+    height: 45px;
 }
 .game_map_before {
     display: inline-block;
@@ -65,7 +71,8 @@ body {
     justify-content: center;
     align-items: center;
 }
-.game_map .cs .o {
+.game_map .cs .o,
+.panel_map .cs .o {
     display: inline-block;
     font-weight: 100;
     color: #efefef;
@@ -73,8 +80,10 @@ body {
     filter:
         drop-shadow(0 0 5px var(--neon))
         drop-shadow(0 0 10px var(--neon));
+    pointer-events: none;
 }
-.game_map .cs .x {
+.game_map .cs .x,
+.panel_map .cs .x {
     display: inline-block;
     font-weight: 100;
     color: #efefef;
@@ -82,6 +91,7 @@ body {
     filter:
         drop-shadow(0 0 5px #f31c1c)
         drop-shadow(0 0 15px #f31c1c);
+    pointer-events: none;
 }
 .panel_map .cs:nth-child(1),
 .game_map .cs:nth-child(1) {
@@ -227,7 +237,6 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #2962ff;
     position: relative;
     cursor: pointer;
 }
@@ -237,8 +246,9 @@ body {
     background: #0cd;
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    width: 150px;
+    justify-content: center;
+    gap: 10px;
+    width: 130px;
     z-index: 1000;
     cursor: default;
 }
@@ -265,39 +275,22 @@ body {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(-100%,-50%);
+    transform: translate(-100%,-30px);
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
 }
 .details .p-2 .avatar .change-avatar::after {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translate(100%,-50%);
+    transform: translate(100%,-30px);
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
 }
 .details .player-config .avatar .change-avatar_option {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
     border-radius: 50%;
-    border: 2px solid #25273a;
     cursor: pointer;
-}
-.details #r {
-    background: #ff1744;
-}
-.details #pi {
-    background: #ec407a;
-}
-.details #pu {
-    background: #aa00ff;
-}
-.details #b {
-    background: #2962ff;
-}
-.details #g {
-    background: #00e676;
-}
-.details #o {
-    background: #ffa726;
 }
 .details .player-config .gun {
     font-size: 80px;
@@ -345,15 +338,14 @@ body {
     justify-content: space-around;
     height: 90px;
 }
-.game .player-1 {
+.game .player-2 {
     transform: rotate(180deg);
 }
 .game .player_avatar {
     display: inline-block;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: #eee;
 }
 .player_score {
     font-size: 25px;
@@ -459,7 +451,7 @@ body {
     .game {
         flex-direction: row;
     }
-    .game .player-1 {
+    .game .player-2 {
         transform: rotate(0);
     }
 }
