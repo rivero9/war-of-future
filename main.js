@@ -591,21 +591,27 @@ const gameInit = ()=>{
     containerMenu.classList.add('game_menu-container');
     const menu = document.createElement('UL');
     menu.classList.add('game_menu');
-    const resume = document.createElement('LI');
-    resume.setAttribute('style','z-index:4')
-    resume.classList.add('game_menu_option');
-    const resumeT = document.createElement('SPAN');
-    resumeT.textContent = "RESUME";
+    const play = document.createElement('LI');
+    play.setAttribute('style','z-index:4')
+    play.classList.add('game_menu_option');
+    const icoPlay = document.createElement('I');
+    icoPlay.classList.add('ico-play');
+    const playT = document.createElement('SPAN');
+    playT.textContent = "RESUME";
     const reset = document.createElement('LI');
     reset.setAttribute('style','z-index:2')
     reset.classList.add('game_menu_option');
+    const icoRes = document.createElement('I');
+    icoRes.classList.add('ico-reset');
     const resetT = document.createElement('SPAN');
     resetT.textContent = "RESET";
-    const me = document.createElement('LI');
-    me.setAttribute('style','z-index:1')
-    me.classList.add('game_menu_option');
-    const meT = document.createElement('SPAN');
-    meT.textContent = "MENU";    
+    const home = document.createElement('LI');
+    home.setAttribute('style','z-index:1')
+    home.classList.add('game_menu_option');
+    const icoHm = document.createElement('I');
+    icoHm.classList.add('ico-home');
+    const hmT = document.createElement('SPAN');
+    hmT.textContent = "MENU";    
     const p1 = document.createElement('DIV');
     p1.classList.add('player','player-1');
     const p1Avt = document.createElement('SPAN');
@@ -659,12 +665,15 @@ const gameInit = ()=>{
     container.appendChild(b);
     container.appendChild(containerMenu);
     containerMenu.appendChild(menu);
-    menu.appendChild(resume);
-    resume.appendChild(resumeT);
+    menu.appendChild(play);
+    play.appendChild(icoPlay);
+    play.appendChild(playT);
     menu.appendChild(reset);
+    reset.appendChild(icoRes);
     reset.appendChild(resetT);
-    menu.appendChild(me);
-    me.appendChild(meT);
+    menu.appendChild(home);
+    home.appendChild(icoHm);
+    home.appendChild(hmT);
     container.appendChild(p2);
     p2.appendChild(p2Avt);
     p2.appendChild(p2sco);
@@ -706,7 +715,7 @@ const gameInit = ()=>{
     b.addEventListener('click',()=>{
         containerMenu.style.display = "flex";
     })
-    resume.addEventListener('click',()=>{
+    play.addEventListener('click',()=>{
         containerMenu.style.display = "none";
     })
     reset.addEventListener('click',()=>{
@@ -715,7 +724,7 @@ const gameInit = ()=>{
         containerMenu.style.display = "none";
         newG();
     })
-    me.addEventListener('click',()=>{
+    home.addEventListener('click',()=>{
         // reset
         const cs = document.querySelectorAll('.cs');
         cs.forEach(c =>{

@@ -402,6 +402,8 @@ body {
     transform: translateX(0);
     transition: background 0.4s, transform 0.4s;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 .game_menu_option::after {
     content: '';
@@ -424,6 +426,24 @@ body {
 }
 .game_menu_option:hover::after {
     background: #2982b9;    
+}
+.game_menu_option i {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 0 8px 0 0;
+}
+.game_menu_option .ico-play {
+    background: url('../icons/play.png') no-repeat;
+    background-size: 100%;    
+}
+.game_menu_option .ico-reset {
+    background: url('../icons/reset.png') no-repeat;
+    background-size: 100%;    
+}
+.game_menu_option .ico-home {
+    background: url('../icons/home.png') no-repeat;
+    background-size: 100%;    
 }
 .game_menu_option span {
     color: #999;
