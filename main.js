@@ -591,13 +591,13 @@ const gameInit = ()=>{
     containerMenu.classList.add('game_menu-container');
     const menu = document.createElement('UL');
     menu.classList.add('game_menu');
-    const play = document.createElement('LI');
-    play.setAttribute('style','z-index:4')
-    play.classList.add('game_menu_option');
-    const icoPlay = document.createElement('I');
-    icoPlay.classList.add('ico-play');
-    const playT = document.createElement('SPAN');
-    playT.textContent = "RESUME";
+    const replay = document.createElement('LI');
+    replay.setAttribute('style','z-index:4')
+    replay.classList.add('game_menu_option');
+    const icoRep = document.createElement('I');
+    icoRep.classList.add('ico-play');
+    const replayT = document.createElement('SPAN');
+    replayT.textContent = "RESUME";
     const reset = document.createElement('LI');
     reset.setAttribute('style','z-index:2')
     reset.classList.add('game_menu_option');
@@ -665,9 +665,9 @@ const gameInit = ()=>{
     container.appendChild(b);
     container.appendChild(containerMenu);
     containerMenu.appendChild(menu);
-    menu.appendChild(play);
-    play.appendChild(icoPlay);
-    play.appendChild(playT);
+    menu.appendChild(replay);
+    replay.appendChild(icoRep);
+    replay.appendChild(replayT);
     menu.appendChild(reset);
     reset.appendChild(icoRes);
     reset.appendChild(resetT);
@@ -698,14 +698,14 @@ const gameInit = ()=>{
             e.stopPropagation();
             if (win) newG();
             else if (cs.childElementCount == 0){
+                const md = sessionStorage.getItem('mode');
+                if (md == 'pvp') player = player == "x" ? "o" : "x";
                 const at = document.createElement('H3');
                 at.classList.add(player);
                 at.textContent = player;
                 cs.appendChild(at);
                 const i = cs.id.split('-')[1];
                 play(player,i-1);
-                const md = sessionStorage.getItem('mode');
-                if (md == 'pvp') player = player == "x" ? "o" : "x";
             } 
         })
     })
@@ -715,7 +715,7 @@ const gameInit = ()=>{
     b.addEventListener('click',()=>{
         containerMenu.style.display = "flex";
     })
-    play.addEventListener('click',()=>{
+    replay.addEventListener('click',()=>{
         containerMenu.style.display = "none";
     })
     reset.addEventListener('click',()=>{
