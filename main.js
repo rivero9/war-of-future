@@ -33,7 +33,6 @@ init.addEventListener('click',()=>{
     const panel = document.querySelector('.panel');
     document.body.removeChild(panel);
     panelMenu()
-    
 });
 const winner = scr =>{
     const score = document.getElementById(`score-${scr}`);
@@ -469,7 +468,7 @@ const playIA = ()=>{
         }
     }
 }
-const changePlayer = (body,storage) =>{
+/*const changePlayer = (body,storage) =>{
     const container = document.createElement('DIV');
     container.classList.add('change-avatar');
     const m1 = document.createElement('SPAN');
@@ -542,7 +541,43 @@ const changePlayer = (body,storage) =>{
         img.setAttribute('src','img/w-3.png');
         sessionStorage.setItem(storage,5);
     })
-}
+}*/
+const changePlayer = (body, storage) => {
+    const container = document.createElement('DIV');
+    container.classList.add('change-avatar');
+
+    const prefixes = ['m', 'w'];
+    const imagePaths = [
+        'img/m-1.png', 'img/m-2.png', 'img/m-3.png',
+        'img/w-1.png', 'img/w-2.png', 'img/w-3.png'
+    ];
+
+    for (let i = 0; i < 6; i++) {
+        const span = document.createElement('SPAN');
+        span.classList.add('change-avatar_option');
+
+        const imgElement = document.createElement('IMG');
+        imgElement.setAttribute('src', imagePaths[i]);
+
+        span.appendChild(imgElement);
+        container.appendChild(span);
+
+        span.addEventListener('click', e => {
+            e.stopPropagation();
+            const mainImg = body.querySelector('img');
+            if (mainImg) {
+                mainImg.setAttribute('src', imagePaths[i]);
+                sessionStorage.setItem(storage, i);
+
+                // close options
+                const changeA = document.querySelector('.change-avatar');
+                container.offsetParent.removeChild(changeA);
+            }
+        });
+    }
+
+    body.appendChild(container);
+};
 const changeCibort = body =>{
     const container = document.createElement('DIV');
     container.classList.add('change-avatar');
@@ -908,6 +943,8 @@ const panelMenu = ()=>{
             PvP.classList.replace('mode_option-off','mode_option-on');
             vC.classList.replace('mode_option-on','mode_option-off');
             sessionStorage.setItem('mode','pvp');
+            p2Avatar.firstElementChild.src = images[3].src;
+            sessionStorage.setItem('p2', 3);
         }
     })
     play.addEventListener('click',()=>{
